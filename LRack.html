@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="gu" class="theme-md-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>એલ રેકના નિયમો (યશ કે પાઠક) - MD3 Corporate PDF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            /* MD Light Theme (Default) */
+            --primary-color: #6750A4;
+            --on-primary-color: #FFFFFF;
+            --primary-container-color: #EADDFF;
+            --on-primary-container-color: #21005D;
+            --secondary-color: #625B71;
+            --on-secondary-color: #FFFFFF;
+            --secondary-container-color: #E8DEF8;
+            --on-secondary-container-color: #1D192B;
+            --tertiary-color: #7D5260;
+            --on-tertiary-color: #FFFFFF;
+            --tertiary-container-color: #FFD8E4;
+            --on-tertiary-container-color: #31111D;
+            --error-color: #B3261E;
+            --on-error-color: #FFFFFF;
+            --error-container-color: #F9DEDC;
+            --on-error-container-color: #410E0B;
+            --background-color: #FFFBFE;
+            --on-background-color: #1C1B1F;
+            --surface-color: #FFFBFE; /* Main content background */
+            --on-surface-color: #1C1B1F; /* Main text color */
+            --surface-variant-color: #E7E0EC; /* Cards, sections background */
+            --on-surface-variant-color: #49454F; /* Secondary text, icons */
+            --outline-color: #79747E;
+            --shadow-color: #000000;
+            --elevation-1: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+            --elevation-2: 0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15);
+            --elevation-3: 0px 4px 8px 3px rgba(0,0,0,0.3), 0px 1px 3px rgba(0,0,0,0.15);
+
+            /* Text customization variables */
+            --base-font-size: 16px; 
+            --base-line-height: 1.7;
+            --base-font-weight: 500; 
+            --bold-font-weight: 700; 
+        }
+
+        html.theme-md-dark {
+            --primary-color: #D0BCFF; --on-primary-color: #381E72; --primary-container-color: #4F378B; --on-primary-container-color: #EADDFF;
+            --secondary-color: #CCC2DC; --on-secondary-color: #332D41; --secondary-container-color: #4A4458; --on-secondary-container-color: #E8DEF8;
+            --tertiary-color: #EFB8C8; --on-tertiary-color: #492532; --tertiary-container-color: #633B48; --on-tertiary-container-color: #FFD8E4;
+            --error-color: #F2B8B5; --on-error-color: #601410; --error-container-color: #8C1D18; --on-error-container-color: #F9DEDC;
+            --background-color: #1C1B1F; --on-background-color: #E6E1E5; --surface-color: #1C1B1F; --on-surface-color: #E6E1E5;
+            --surface-variant-color: #49454F; --on-surface-variant-color: #CAC4D0; --outline-color: #938F99;
+        }
+
+        html.theme-high-contrast-dark {
+            --primary-color: #F5F0FF; --on-primary-color: #0A001E; --primary-container-color: #BCA4FF; --on-primary-container-color: #000000;
+            --secondary-color: #EAE2F8; --on-secondary-color: #0A0718; --secondary-container-color: #B8AECB; --on-secondary-container-color: #000000;
+            --tertiary-color: #FFD0DF; --on-tertiary-color: #1E050F; --tertiary-container-color: #DFA7B8; --on-tertiary-container-color: #000000;
+            --error-color: #FFC0BC; --on-error-color: #380000; --error-container-color: #B3261E; --on-error-container-color: #FFFFFF;
+            --background-color: #0A090D; --on-background-color: #FFFFFF; --surface-color: #0A090D; --on-surface-color: #FFFFFF;
+            --surface-variant-color: #3A353F; --on-surface-variant-color: #F0ECF4; --outline-color: #A8A3AE; --base-font-weight: 600;
+        }
+        
+        html.theme-mint-breeze {
+            --primary-color: #006A60; --on-primary-color: #FFFFFF; --primary-container-color: #7BF8E9; --on-primary-container-color: #00201C;
+            --secondary-color: #4A635F; --on-secondary-color: #FFFFFF; --secondary-container-color: #CCE8E3; --on-secondary-container-color: #05201C;
+            --tertiary-color: #456179; --on-tertiary-color: #FFFFFF; --tertiary-container-color: #CAE6FF; --on-tertiary-container-color: #001E30;
+            --error-color: #BA1A1A; --on-error-color: #FFFFFF; --error-container-color: #FFDAD6; --on-error-container-color: #410002;
+            --background-color: #F4FDFA; --on-background-color: #161D1C; --surface-color: #F4FDFA; --on-surface-color: #161D1C;
+            --surface-variant-color: #D9E5E2; --on-surface-variant-color: #3F4947; --outline-color: #6F7977;
+        }
+
+        body {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--background-color);
+            color: var(--on-background-color);
+            font-size: var(--base-font-size);
+            line-height: var(--base-line-height);
+            font-weight: var(--base-font-weight);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0;
+            padding-top: 80px; /* Adjusted for potentially taller header */
+            padding-bottom: 80px; 
+        }
+
+        .app-header {
+            background-color: var(--surface-color);
+            color: var(--on-surface-color);
+            box-shadow: var(--elevation-2);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .app-header .title-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .app-header h1 {
+            font-size: 1.2rem; /* MD3 Title Large-ish */
+            font-weight: var(--bold-font-weight);
+            color: var(--primary-color);
+            margin: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .app-header .created-by {
+            font-size: 0.7rem;
+            color: var(--on-surface-variant-color);
+            font-weight: var(--base-font-weight);
+            margin-top: 2px;
+        }
+        @media (min-width: 640px) { /* For wider screens, put title and created by inline */
+             .app-header .title-area {
+                flex-direction: row;
+                align-items: baseline;
+            }
+            .app-header h1 {
+                 font-size: 1.25rem;
+            }
+            .app-header .created-by {
+                 font-size: 0.75rem;
+                 margin-top: 0;
+                 margin-left: 0.75rem;
+            }
+        }
+
+        .settings-toggle-btn {
+            background-color: var(--primary-container-color);
+            color: var(--on-primary-container-color);
+            border: none;
+            border-radius: 50%; 
+            width: 48px; 
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--elevation-3);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            flex-shrink: 0; /* Prevent shrinking if title area is long */
+        }
+        .settings-toggle-btn:hover { opacity: 0.9; }
+        .settings-toggle-btn .fas { font-size: 1.25rem; }
+
+        .settings-panel {
+            position: fixed; bottom: -100%; left: 0; right: 0;
+            background-color: var(--surface-variant-color); color: var(--on-surface-variant-color);
+            padding: 1.5rem 1rem; border-top-left-radius: 24px; border-top-right-radius: 24px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.15); z-index: 1001;
+            transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); max-height: 70vh; overflow-y: auto;
+        }
+        .settings-panel.visible { bottom: 0; }
+        .settings-panel h3 {
+            font-size: 1.1rem; font-weight: var(--bold-font-weight); color: var(--on-surface-variant-color);
+            margin-top: 0; margin-bottom: 1rem;
+        }
+        .settings-group { margin-bottom: 1.5rem; }
+        .settings-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: var(--base-font-weight); }
+        .theme-buttons button, .control-buttons button {
+            background-color: var(--primary-color); color: var(--on-primary-color);
+            border: 1px solid var(--primary-color); padding: 0.5rem 1rem; border-radius: 20px;
+            font-size: 0.85rem; font-weight: var(--base-font-weight); cursor: pointer;
+            margin-right: 0.5rem; margin-bottom: 0.5rem; transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+        }
+        .theme-buttons button.active, .control-buttons button:hover {
+            background-color: var(--primary-container-color); color: var(--on-primary-container-color);
+            border-color: var(--primary-container-color);
+        }
+         .control-buttons button { min-width: 40px; padding: 0.5rem; }
+         .control-buttons span { margin: 0 0.75rem; font-size: 0.9rem; }
+
+        .container {
+            max-width: 900px; margin: 1rem auto; padding: 0.5rem;
+            background-color: transparent; border-radius: 0; box-shadow: none;
+        }
+        @media (min-width: 768px) { .container { margin: 1.5rem auto; padding: 1rem; } }
+        
+        .tab-container {
+            display: flex; margin-bottom: 1.5rem; border-bottom: 1px solid var(--outline-color);
+            overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 0.5rem;
+        }
+        .tab-container::-webkit-scrollbar { display: none; }
+        .tab-button {
+            padding: 0.75rem 1.25rem; cursor: pointer; border: none; background-color: transparent;
+            font-size: 0.9rem; font-weight: var(--base-font-weight); color: var(--on-surface-variant-color);
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 3px solid transparent; white-space: nowrap; flex-shrink: 0;
+            border-radius: 8px 8px 0 0;
+        }
+        .tab-button.active { color: var(--primary-color); border-bottom-color: var(--primary-color); font-weight: var(--bold-font-weight); }
+        .tab-button:hover:not(.active) { background-color: rgba(var(--primary-color-rgb, 103, 80, 164), 0.08); }
+
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section {
+            background-color: var(--surface-variant-color); color: var(--on-surface-variant-color);
+            padding: 1.25rem; border-radius: 16px; margin-bottom: 1.5rem;
+            border: 1px solid var(--outline-color); box-shadow: var(--elevation-1);
+        }
+        .section-title {
+            font-size: 1.2rem; font-weight: var(--bold-font-weight); color: var(--on-surface-variant-color);
+            margin-bottom: 1rem; display: flex; align-items: center; cursor: pointer;
+        }
+        .section-title .fas { margin-right: 0.75rem; transition: transform 0.3s ease; color: var(--primary-color); }
+        .section-content.collapsed { display: none; }
+        .section-title .fa-chevron-down.rotate { transform: rotate(-90deg); }
+        
+        h3 {
+            font-size: 1.05rem; font-weight: var(--bold-font-weight); color: var(--on-surface-variant-color);
+            margin-top: 1.25rem; margin-bottom: 0.75rem;
+        }
+        p, li { font-size: 0.95em; color: var(--on-surface-variant-color); margin-bottom: 0.6rem; }
+        strong { font-weight: var(--bold-font-weight); color: var(--on-surface-color); } /* Use on-surface for strong text for better contrast */
+        ul, ol { margin-left: 1.25rem; padding-left: 0.5rem; }
+
+        .note-highlight {
+            background-color: var(--tertiary-container-color); color: var(--on-tertiary-container-color);
+            padding: 1rem; border-left: 5px solid var(--tertiary-color); margin: 1rem 0; border-radius: 8px;
+        }
+        .note-highlight p, .note-highlight strong { color: var(--on-tertiary-container-color); }
+
+        .export-button-container { text-align: center; margin: 2rem 0 1rem 0; }
+        .export-button {
+            background-color: var(--primary-color); color: var(--on-primary-color);
+            padding: 0.75rem 1.75rem; border-radius: 20px; font-weight: var(--bold-font-weight);
+            font-size: 0.9rem; cursor: pointer; transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border: none; box-shadow: var(--elevation-1); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .export-button:hover:not(:disabled) { background-color: rgba(var(--primary-color-rgb, 103, 80, 164), 0.9); box-shadow: var(--elevation-2); }
+        .export-button:disabled {
+            background-color: var(--outline-color); color: var(--surface-color);
+            cursor: not-allowed; box-shadow: none; opacity: 0.7;
+        }
+        .export-button .fas { margin-right: 0.5rem; }
+
+        .table-responsive-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 1rem; border-radius: 8px; border: 1px solid var(--outline-color); }
+        table { width: 100%; min-width: 600px; border-collapse: collapse; margin-top: 0; }
+        th, td {
+            border: 1px solid var(--outline-color); padding: 0.85rem 1rem; text-align: left;
+            font-size: 0.9em; color: var(--on-surface-variant-color);
+        }
+        th {
+            background-color: rgba(var(--primary-color-rgb, 103, 80, 164), 0.1); font-weight: var(--bold-font-weight);
+            color: var(--primary-color); white-space: nowrap;
+        }
+        th[data-sort] { cursor: pointer; } /* Add cursor only if sortable */
+        th .fas { margin-left: 0.5rem; }
+        tbody tr:nth-child(even) { background-color: rgba(var(--on-surface-rgb, 28, 27, 31), 0.02); }
+
+        .search-input {
+            width: 100%; padding: 0.85rem 1rem; margin-bottom: 1rem; border: 1px solid var(--outline-color);
+            border-radius: 8px; font-size: 0.95em; box-sizing: border-box;
+            background-color: var(--surface-color); color: var(--on-surface-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 103, 80, 164), 0.3);
+            outline: none;
+        }
+        .item-count { font-size: 0.85em; color: var(--on-surface-variant-color); margin-bottom: 0.5rem; text-align: right; }
+        
+        .themed-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: var(--base-font-weight);
+        }
+        .themed-link:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .themed-link .fas {
+            font-size: 0.85em;
+        }
+
+        /* Styles for PDF generation (applied to cloned document) */
+        .pdf-export-prepare #contentToExport {
+            background-color: #FFFFFF !important; /* Force white background for PDF */
+        }
+        .pdf-export-prepare .section,
+        .pdf-export-prepare .note-highlight,
+        .pdf-export-prepare .search-input,
+        .pdf-export-prepare body,
+        .pdf-export-prepare html {
+            background-color: #FFFFFF !important; /* Force white background for PDF */
+            color: #000000 !important; /* Force black text for PDF */
+        }
+        .pdf-export-prepare .section-title,
+        .pdf-export-prepare h3,
+        .pdf-export-prepare p,
+        .pdf-export-prepare li,
+        .pdf-export-prepare strong,
+        .pdf-export-prepare th,
+        .pdf-export-prepare td,
+        .pdf-export-prepare .item-count,
+        .pdf-export-prepare .themed-link { /* Ensure links are black in PDF */
+            color: #000000 !important;
+        }
+        .pdf-export-prepare .section-title .fas {
+            color: #333333 !important; /* Darker icon for PDF */
+        }
+         .pdf-export-prepare .note-highlight {
+            border-left-color: #CCCCCC !important;
+        }
+        .pdf-export-prepare th {
+            background-color: #f0f0f0 !important; /* Light gray for table headers in PDF */
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="title-area">
+            <h1><i class="fas fa-tasks-alt mr-2"></i> એલ રેકના નિયમો</h1>
+            <span class="created-by">YashPathak09 Rack (_L_) દ્વારા</span>
+        </div>
+        <button id="settingsToggle" class="settings-toggle-btn" aria-label="સેટિંગ્સ ખોલો">
+            <i class="fas fa-cog"></i>
+        </button>
+    </header>
+
+    <div class="container" id="contentToExport">
+        <div class="export-button-container">
+            <button id="exportPdfBtn" class="export-button"><i class="fas fa-file-pdf"></i> PDF માં નિકાસ કરો</button>
+        </div>
+
+        <nav class="tab-container">
+            <button class="tab-button active" data-tab="apps_data"><i class="fas fa-mobile-alt mr-2"></i> એપ્સ અને ડેટા</button>
+            <button class="tab-button" data-tab="rules"><i class="fas fa-gavel mr-2"></i> મુખ્ય નિયમો</button>
+            <button class="tab-button" data-tab="stock"><i class="fas fa-boxes-stacked mr-2"></i> સ્ટોક</button>
+            <button class="tab-button" data-tab="parties"><i class="fas fa-users mr-2"></i> પાર્ટી</button>
+            <button class="tab-button" data-tab="companies"><i class="fas fa-building mr-2"></i> કંપની</button>
+            <button class="tab-button" data-tab="products"><i class="fas fa-pills mr-2"></i> પ્રોડક્ટ</button>
+            <button class="tab-button" data-tab="notes"><i class="fas fa-sticky-note mr-2"></i> નોંધો</button>
+        </nav>
+
+        <div id="apps_data" class="tab-content active">
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-info-circle mr-2"></i> પરિચય અને ઉપયોગી લિંક્સ</h2>
+                <div class="section-content">
+                    <p>મારા બનાવેલ એન્ડ્રોઇડ એપ નીચે મુજબ છે, જે રેક માં રેક મેનેજમેન્ટ માટે તમને ઉપયોગી થશે. તેવી આશા રાખું છું. 🙏🙏 રામ રામ</p>
+                    
+                    <h3>રેક સર્ચ એપ્લિકેશન</h3>
+                    <p>રેક સર્ચ ડાયરેક્ટ યુઝ કરવા માટે નીચેની લિંક ઓપન કરો:</p>
+                    <p><a href="https://msy09.netlify.app/" target="_blank" class="themed-link">https://msy09.netlify.app/ <i class="fas fa-external-link-alt ml-1"></i></a></p>
+                    <p>એક્સેલ Data 1, ને Data 2 download કરી રેક સર્ચ નું પેજ ઓપન થાય એટલે, આ બંને ડેટા import કરો. પછી ડેટા સર્ચ કરો.</p>
+                    
+                    <h4 class="mt-4">ડેટા ફાઇલો ડાઉનલોડ કરો:</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="https://mega.nz/file/si4QRBra#j7EEW10PB-HJ42q2R9bPK3PLDk4lB3gPGnoQxHR-iLw" target="_blank" class="themed-link">Data 1 <i class="fas fa-download ml-1"></i></a></li>
+                        <li><a href="https://mega.nz/file/lnQ3QZDK#hOAwSNCikkKlMLAY0KdCfJCcwe2znGz8Sd2r0EBnqyo" target="_blank" class="themed-link">Data 2 <i class="fas fa-download ml-1"></i></a></li>
+                    </ul>
+                </div>
+            </section>
+        
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-download mr-2"></i> APK ડાઉનલોડ્સ</h2>
+                <div class="section-content">
+                    <p>નીચે આપેલ લિસ્ટમાંથી APK ફાઇલો ડાઉનલોડ કરી શકાશે:</p>
+                    <div class="table-responsive-wrapper">
+                        <table id="apkTable" class="w-full">
+                            <thead>
+                                <tr>
+                                    <th>APK નામ</th>
+                                    <th>તારીખ અને સમય</th>
+                                    <th>કદ</th>
+                                    <th>ડાઉનલોડ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Data Rack.apk</td>
+                                    <td>24 ડિસેમ્બર 2024, 6:47 am</td>
+                                    <td>0.89 MB</td>
+                                    <td><a href="https://mega.nz/file/kipFyD7b#6K408f0mrMPo_Ipxrt27676bSbqyGnHbxBucfA1BjYA" target="_blank" class="themed-link">ડાઉનલોડ કરો <i class="fas fa-cloud-download-alt ml-1"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>DEX09.apk</td>
+                                    <td>14 જાન્યુઆરી, 12:27 pm</td>
+                                    <td>0.88 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>DGXD.apk</td>
+                                    <td>8 એપ્રિલ, 6:10 am</td>
+                                    <td>833 KB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>DGX17.apk</td>
+                                    <td>13 એપ્રિલ, 4:44 am</td>
+                                    <td>0.99 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>DVX1.apk</td>
+                                    <td>11 એપ્રિલ, 12:09 am</td>
+                                    <td>833 KB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>Ex Data Ready.apk</td>
+                                    <td>15 એપ્રિલ, 7:31 am</td>
+                                    <td>1.01 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>MSY09.apk (EX EM)</td>
+                                    <td>16 મે, 2:26 am</td>
+                                    <td>1.05 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>DhrwiPharma.apk</td>
+                                    <td>18 સપ્ટેમ્બર 2024, 1:30 am</td>
+                                    <td>1.02 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>Overtime.apk</td>
+                                    <td>17 સપ્ટેમ્બર 2024, 4:44 am</td>
+                                    <td>1.09 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>Tracker Ca.apk</td>
+                                    <td>2 નવેમ્બર 2024, 2:51 pm</td>
+                                    <td>845 KB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>TrackrCa.apk</td>
+                                    <td>20 જાન્યુઆરી, 5:40 pm</td>
+                                    <td>845 KB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>Billing DHP.apk</td>
+                                    <td>20 જાન્યુઆરી, 8:50 am</td>
+                                    <td>0.89 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>DG10.apk</td>
+                                    <td>23 ફેબ્રુઆરી, 7:30 pm</td>
+                                    <td>1.07 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                                <tr>
+                                    <td>OPharma09.apk</td>
+                                    <td>2 એપ્રિલ, 1:33 pm</td>
+                                    <td>1.07 MB</td>
+                                    <td>ઉપલબ્ધ નથી</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="rules" class="tab-content">
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-chevron-down"></i> સામાન્ય નિયમો</h2>
+                <div class="section-content">
+                    <p><strong>R..1</strong> જ્યારે પણ રેકમાં કોઈ પણ કંપનીનો માલ આવે પહેલા નામ વાંચી, batch જોઈ લેવી, જેથી કોઈ બિલમાં બન્યું હોય અને રેકમાં ખલાસ થઈ ગઈ હોય તો તમને ખબર રહે તમારે એ માલમાંથી કાઢીને આપવાનું છે, પછી જ્યારે Time મળે તેમ માલ રેકમાં ગોઠવતા જવું.</p>
+                    <p><strong>R..2</strong> જો કોઈપણ સ્ટોકમાં એરર હોય તો તેની નોંધ લેવી, એક કાગળ અથવા તો ડાયરીમાં નોંધ લેવી, સાંજે સમય અનુકૂળ હોય ત્યારે જે સ્ટોકની નોંધણી કરેલ હોય તે ડાયરી કે રફ કાગળમાં જોઈ સ્ટોક ચકાસણી કરી લેવી. વધારે કોઈ મોટી એરર લાગે તો મેનેજર શ્રી ને જાણ કરવી.</p>
+                    <p><strong>R.3</strong> Darolac Mini 1 packet માં 6 આવે એ પ્રમાણે આપવું કટીંગ ના થાય, 1 આખું box આપવું, 6,12,18 એ રીતે બિલમાં બને તોજ આપવું ટૂંકમાં 6+6 થતું હોય તોજ આપવું, biogermina os 10 Qty બને તોજ આપવું 5 કે 12 બને તો ટ્રેડ ના બિલમાં બને તો સુધારી Qty ને 10 કરાવી.</p>
+                    <p><strong>R.4</strong> Perfectil tab જ્યારે પણ બને ત્યારે ખાસ, 1 આખું Box આપવું તેમાંથી ટેબ્લેટ ના પત્તા નીકળવા નહીં, ખાસ ચેક કરી ને પછી આપવું, તે 1 box અપાય, આખા box ની MRP લખી હોય બિલમાં, તે ખાસ ચેક કરવી, માટે સિંગલ ટેબ્લેટ નું પત્તુ આપવું નહીં.</p>
+                    <p><strong>R.5</strong> wellman જ્યારે પણ wellman ટેબ્લેટ બિલમાં બને તે પણ આખું box આપવાનું 3 પત્તા ટેબ્લેટ ના આવે એ box મા, માટે સિંગલ પત્તુ કાઢી ને આપવું નહીં ખાસ ચેક કરવી MRP અને batch પછીજ product કાઢવી.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="stock" class="tab-content">
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-chevron-down"></i> સ્ટોક વ્યવસ્થાપન અને ઓર્ડરિંગ સૂચનો</h2>
+                <div class="section-content">
+                    <p><strong>1. Flexone 100ml ઓર 60ml:</strong> સીરપ ખલાસ થાય તો પહેલા સ્ટોક ચેક કરવો, ત્યાર પછી જો નીચે ના બતાડે તો ઉપર 231 ઉપર થી ફોન કરી મંગાવી લેવી.</p>
+                    <p><strong>2. Mikacin 500,100,250:</strong> આ બધા પ્રકાર ના ઇન્જેક્શન ખલાસ થાય તો પહેલા આગળ જઈ સ્ટોક ચેક કરવો ત્યારબાદ સ્ટોકમાં ન હોય તો ઉપર ગોડાઉન માં બોલતા હોય તો ફોન કરી 231 માંગવા.</p>
+                    <p><strong>3. Mulmina Mango 200ml, apple, Orange:</strong> નીચે સ્ટોરમાં ના હોય તો પહેલા સ્ટોક ચેક કરાવી, ના હોય નીચે સ્ટોરમાં, ઉપર સ્ટોકમાં હોય તો 231 ઉપર ફોન કરી મંગાવું.</p>
+                    <p><strong>4. OLYT ORS:</strong> હંમેશા BATCH જોઈ ને આપવું, આમતો, એ 120, કા તો 28, કા તો 60, બને છે, છૂટક જાય પણ ક્યારેક, માટે પેટી આવે ત્યારે તોડવી નહીં કેમકે બિલ માં QTY 60 કે 120 હશે તો આખે આખી પેટી આપવી પડે, એક BOX માં 60 નંગ આવે 30+30 આવે.</p>
+                    <p><strong>5. EVINAL 400:</strong> જ્યારે સ્ટોરમાં નીચે ખલાસ થાય ત્યારે, આગળ જઈ સ્ટોક ચેક કરાવું, નીચે સ્ટોક 0 હોય અને જો ઉપર ગોડાઉનમાં હોય તો 231 ફોન કરી નીચે મંગાવું.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="parties" class="tab-content">
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-chevron-down"></i> પાર્ટી યાદી (MRP મુજબ - બેચ વગર)</h2>
+                <div class="section-content">
+                    <input type="text" class="search-input" id="searchMrpParty" placeholder="પાર્ટી શોધો...">
+                    <div class="item-count" id="mrpPartyCount"></div>
+                    <h3>(1) Apollo:</h3>
+                    <ul id="mrpPartyListApollo" class="list-disc pl-5">
+                        <li>HD</li> <li>Travel</li> <li>Route</li>
+                    </ul>
+                    <h3>(2) Salesmen:</h3>
+                    <ul id="mrpPartyListSalesmen" class="list-disc pl-5">
+                        <li>Gopal Bhai Shah</li> <li>Manoj bhai Shah</li> <li>Dhaval Shah</li> <li>Mahesh Panchal</li> <li>Manishkumar</li> <li>Yash Khatri</li> <li>Aryan khastriya</li> <li>Sunil Khastriya</li> <li>Alpesh Rangi</li> <li>Milan Soni</li> <li>Deepak Jani</li> <li>Mukesh Jain</li> <li>Dharmesh Patel</li> <li>Ronak Gohel</li> <li>Jay vanjani</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-chevron-down"></i> પાર્ટી યાદી (બેચ મુજબ)</h2>
+                <div class="section-content">
+                    <input type="text" class="search-input" id="searchBatchParty" placeholder="પાર્ટી શોધો...">
+                    <div class="item-count" id="batchPartyCount"></div>
+                    <h3>1. Branch Transfer</h3>
+                    <h3>2. Apollo:</h3>
+                    <ul id="batchPartyListApollo" class="list-disc pl-5">
+                        <li>AHEL AHO IP (SUBSTORE)</li> <li>Ahead-SVP-of pharmacy</li> <li>CVHE</li> <li>AHIL (CENTRAL PUR) OP Pharmacy</li>
+                    </ul>
+                    <h3>3. Purchase Return (PR)</h3>
+                    <h3>4. Salesmen:</h3>
+                    <ul id="batchPartyListSalesmen" class="list-disc pl-5">
+                        <li>Direct</li> <li>Neel Dalwadi</li> <li>Mayur khosti</li> <li>Krunal Soni</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <div id="companies" class="tab-content">
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-list-ol mr-2"></i> કંપની યાદી - રેક (L)</h2>
+                <input type="text" class="search-input" id="searchCompany" placeholder="કંપની શોધો...">
+                <div class="item-count" id="companyCount"></div>
+                <ol class="list-decimal list-inside" id="companyList">
+                    <li>MEYER</li><li>MICRO</li><li>ARISTO</li><li>ALLEMBIC</li><li>EAST INDIA</li><li>TROIKAA</li>
+                    <li>ALLEMBIC-G</li><li>HEXAGON</li><li>GENERIC</li><li>JENBURKT</li><li>JUGGAT</li><li>NOVELTY</li>
+                    <li>OMEGA ΒΙΟ</li><li>PFIZER SPECIALIST</li><li>PFIZER</li><li>SIGNUTRA</li><li>THEMIS</li>
+                    <li>TROIKAA G</li><li>TTK</li>
+                </ol>
+            </section>
+        </div>
+
+        <div id="products" class="tab-content">
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-table mr-2"></i> પ્રોડક્ટ યાદી (ધીમી ચાલતી)</h2>
+                <input type="text" class="search-input" id="searchProduct" placeholder="પ્રોડક્ટ શોધો...">
+                <div class="item-count" id="productCount"></div>
+                <div class="table-responsive-wrapper">
+                    <table id="productTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="s_no">ક્રમ નંબર <i class="fas fa-sort"></i></th>
+                                <th data-sort="product_name">પ્રોડક્ટનું નામ <i class="fas fa-sort"></i></th>
+                                <th data-sort="category">શ્રેણી <i class="fas fa-sort"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Mero SB 1.5 INJ</td><td>Slow Product</td></tr>
+                            <tr><td>2</td><td>Mero 500 INJ</td><td>Slow Product</td></tr>
+                            <tr><td>3</td><td>Monocef 250 INJ</td><td>Slow Product</td></tr>
+                            <tr><td>4</td><td>Monocef 125 INJ</td><td>Slow Product</td></tr>
+                            <tr><td>5</td><td>MONOCEF SB 1GM INJ</td><td>Slow Product</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <div id="notes" class="tab-content">
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-chevron-down"></i> મહત્વપૂર્ણ નોંધો</h2>
+                <div class="section-content">
+                    <div class="note-highlight">
+                        <p><i class="fas fa-exclamation-triangle mr-2"></i> <strong>કાચની વસ્તુઓ:</strong> કાચ ની કોઈપણ વસ્તુ ધ્યાન થી કાઢવી, ઉતાવળ કરવી નહીં.</p>
+                    </div>
+                    <div class="note-highlight">
+                        <p><i class="fas fa-calendar-week mr-2"></i> <strong>સાપ્તાહિક માલ:</strong> રેક મા પ્રોડક્ટ નો માલ દર અઠવાડિયે આવશે, માટે પહેલા થીજ તૈયારી કરી રાખવી, Phyzer પેલા આવશે, East India, Troika, Micro, Alembic, Aristo, કયારેક પહેલા Aristo પણ આવી શકે, માટે અઠવાડિયું પતે એટલે વધારાની પ્રોડક્ટ નીચે ઉતારી લેવી, ઉપર ના box ચેક કરી લેવા, રોજે રોજ પ્રોડક્ટ નીચે ઉતાર તા રહેવું ખૂટે તેમ.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title collapsible"><i class="fas fa-chevron-down"></i> દૈનિક કાર્યો (Rutin)</h2>
+                <div class="section-content">
+                    <p><i class="fas fa-utensils mr-2"></i> જમ્યા પછી ગ્રીન કેરેટ કાઢવા, ગ્રે કલર નું કેરેટ જેમાં CVDC હોય તે પણ પહેલા કાઢી નાખવું, પછી Red કેરેટ કાઢવા.</p>
+                    <p><i class="fas fa-file-invoice mr-2"></i> કોઈ બારે થી હોસ્પિટલ નું બિલ લેવા આયુ હોય તો પહેલા તે આપી દેવું, batch, MRP, Qty ખાસ ચેક કરી ને આપવું કઇ સુધારો કરવાજેવો હોય તો સુધારો કરવી અને બિલ માં મેન્શન કરવુ, BATCH સુધારેલ છે, કે QTY સુધારેલ છે, કે BATCH અને QTY Edite કરેલ છે.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3><i class="fas fa-palette mr-2"></i> થીમ પસંદ કરો</h3>
+        <div class="settings-group theme-buttons">
+            <button data-theme="theme-md-light" class="theme-btn">MD લાઇટ</button>
+            <button data-theme="theme-md-dark" class="theme-btn">MD ડાર્ક</button>
+            <button data-theme="theme-high-contrast-dark" class="theme-btn">હાઈ કોન્ટ્રાસ્ટ ડાર્ક</button>
+            <button data-theme="theme-mint-breeze" class="theme-btn">મિન્ટ બ્રીઝ</button>
+        </div>
+
+        <h3><i class="fas fa-text-height mr-2"></i> ટેક્સ્ટ કદ</h3>
+        <div class="settings-group control-buttons">
+            <button id="decreaseFontSize" aria-label="ફોન્ટનું કદ ઘટાડો"><i class="fas fa-minus"></i></button>
+            <span id="currentFontSizeLabel">સામાન્ય</span>
+            <button id="increaseFontSize" aria-label="ફોન્ટનું કદ વધારો"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <h3><i class="fas fa-arrows-alt-v mr-2"></i> લીટીની ઊંચાઈ</h3>
+        <div class="settings-group control-buttons">
+            <button id="decreaseLineHeight" aria-label="લીટીની ઊંચાઈ ઘટાડો"><i class="fas fa-minus"></i></button>
+            <span id="currentLineHeightLabel">સામાન્ય</span>
+            <button id="increaseLineHeight" aria-label="લીટીની ઊંચાઈ વધારો"><i class="fas fa-plus"></i></button>
+        </div>
+         <button id="closeSettingsPanel" class="mt-4 w-full text-center py-3 rounded-lg" style="background-color: var(--secondary-container-color); color: var(--on-secondary-container-color); font-weight: var(--bold-font-weight);">બંધ કરો</button>
+    </div>
+
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+
+        function hexToRgb(hex) {
+            var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            hex = hex.replace(shorthandRegex, function(m, r, g, b) { return r + r + g + g + b + b; });
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null;
+        }
+        
+        function updateRgbColors() {
+            const computedStyle = getComputedStyle(document.documentElement);
+            const primaryColorHex = computedStyle.getPropertyValue('--primary-color').trim();
+            const onSurfaceHex = computedStyle.getPropertyValue('--on-surface-color').trim();
+            const primaryRgb = hexToRgb(primaryColorHex);
+            const onSurfaceRgb = hexToRgb(onSurfaceHex);
+            if (primaryRgb) { document.documentElement.style.setProperty('--primary-color-rgb', `${primaryRgb.r},${primaryRgb.g},${primaryRgb.b}`); }
+            if (onSurfaceRgb) { document.documentElement.style.setProperty('--on-surface-rgb', `${onSurfaceRgb.r},${onSurfaceRgb.g},${onSurfaceRgb.b}`); }
+        }
+
+        $(document).ready(function() {
+            const $html = $('html');
+            const $body = $('body');
+            const settingsPanel = $('#settingsPanel');
+            const settingsToggleBtn = $('#settingsToggle');
+            const closeSettingsBtn = $('#closeSettingsPanel');
+            const originalPageTitle = document.title; 
+            const createdByPDFText = "Created By YashPathak09 Rack (_L_)"; 
+
+            updateRgbColors();
+
+            settingsToggleBtn.on('click', function() {
+                settingsPanel.toggleClass('visible');
+                $(this).find('.fas').toggleClass('fa-cog fa-times');
+            });
+            closeSettingsBtn.on('click', function() {
+                settingsPanel.removeClass('visible');
+                settingsToggleBtn.find('.fas').removeClass('fa-times').addClass('fa-cog');
+            });
+
+            const defaultTheme = 'theme-md-light';
+            const savedTheme = localStorage.getItem('appTheme') || defaultTheme;
+            $html.removeClass().addClass(savedTheme);
+            $('.theme-btn[data-theme="' + savedTheme + '"]').addClass('active');
+            updateRgbColors();
+
+            $('.theme-btn').on('click', function() {
+                const selectedTheme = $(this).data('theme');
+                $html.removeClass().addClass(selectedTheme);
+                localStorage.setItem('appTheme', selectedTheme);
+                $('.theme-btn').removeClass('active'); $(this).addClass('active');
+                updateRgbColors();
+            });
+
+            let currentFontSize = parseFloat(localStorage.getItem('fontSize')) || 16;
+            const fontSizeStep = 1, minFontSize = 12, maxFontSize = 22;
+            function applyFontSize() {
+                document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+                localStorage.setItem('fontSize', currentFontSize);
+                $('#currentFontSizeLabel').text(currentFontSize + 'px');
+            }
+            $('#increaseFontSize').on('click', function() { if (currentFontSize < maxFontSize) { currentFontSize += fontSizeStep; applyFontSize(); } });
+            $('#decreaseFontSize').on('click', function() { if (currentFontSize > minFontSize) { currentFontSize -= fontSizeStep; applyFontSize(); } });
+            applyFontSize();
+
+            let currentLineHeight = parseFloat(localStorage.getItem('lineHeight')) || 1.7;
+            const lineHeightStep = 0.1, minLineHeight = 1.3, maxLineHeight = 2.5;
+            function applyLineHeight() {
+                document.documentElement.style.setProperty('--base-line-height', currentLineHeight);
+                localStorage.setItem('lineHeight', currentLineHeight);
+                $('#currentLineHeightLabel').text(currentLineHeight.toFixed(1));
+            }
+            $('#increaseLineHeight').on('click', function() { if (currentLineHeight < maxLineHeight) { currentLineHeight = parseFloat((currentLineHeight + lineHeightStep).toFixed(1)); applyLineHeight(); } });
+            $('#decreaseLineHeight').on('click', function() { if (currentLineHeight > minLineHeight) { currentLineHeight = parseFloat((currentLineHeight - lineHeightStep).toFixed(1)); applyLineHeight(); } });
+            applyLineHeight();
+
+            $('.tab-button').on('click', function() {
+                $('.tab-button').removeClass('active'); $(this).addClass('active');
+                var tabId = $(this).data('tab');
+                $('.tab-content').removeClass('active'); $('#' + tabId).addClass('active');
+            });
+
+            $('.collapsible').on('click', function() {
+                $(this).find('.fas.fa-chevron-down').toggleClass('rotate');
+                $(this).next('.section-content').toggleClass('collapsed').slideToggle(300);
+            });
+            // Ensure initially collapsed sections have the rotate class if they start collapsed (optional)
+            $('.section-content.collapsed').prev('.collapsible').find('.fas.fa-chevron-down').addClass('rotate');
+
+
+            // Search functionality for Party (MRP)
+            $('#searchMrpParty').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                var count = 0;
+                $("#mrpPartyListApollo li, #mrpPartyListSalesmen li").filter(function() {
+                    var match = $(this).text().toLowerCase().indexOf(value) > -1;
+                    $(this).toggle(match);
+                    if (match) count++;
+                    return match;
+                });
+                $('#mrpPartyCount').text("પરિણામો: " + count);
+            });
+
+            // Search functionality for Party (Batch)
+            $('#searchBatchParty').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                var count = 0;
+                $("#batchPartyListApollo li, #batchPartyListSalesmen li").filter(function() { // Assuming similar list IDs
+                    var match = $(this).text().toLowerCase().indexOf(value) > -1;
+                    $(this).toggle(match);
+                    if (match) count++;
+                    return match;
+                });
+                $('#batchPartyCount').text("પરિણામો: " + count);
+            });
+            
+            // Search functionality for Company
+            $('#searchCompany').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                var count = 0;
+                $("#companyList li").filter(function() {
+                    var match = $(this).text().toLowerCase().indexOf(value) > -1;
+                    $(this).toggle(match);
+                    if (match) count++;
+                    return match;
+                });
+                $('#companyCount').text("પરિણામો: " + count);
+            });
+
+            // Search and sort for Product Table
+            const $productTable = $('#productTable');
+            const $productTbody = $productTable.find('tbody');
+            const productRows = $productTbody.find('tr').toArray(); // Store original rows
+
+            $('#searchProduct').on('keyup', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                let count = 0;
+                $productTbody.empty(); // Clear current rows
+
+                productRows.forEach(row => {
+                    const $row = $(row);
+                    const textMatch = $row.text().toLowerCase().indexOf(searchTerm) > -1;
+                    if (textMatch) {
+                        $productTbody.append($row);
+                        count++;
+                    }
+                });
+                $('#productCount').text("પરિણામો: " + count);
+            });
+            
+            let sortDirections = {};
+            $productTable.find('th[data-sort]').on('click', function() {
+                const column = $(this).data('sort');
+                const $icon = $(this).find('.fas');
+                $productTable.find('th[data-sort] .fas').not($icon).removeClass('fa-sort-up fa-sort-down').addClass('fa-sort');
+
+                sortDirections[column] = sortDirections[column] === 'asc' ? 'desc' : 'asc';
+                
+                if (sortDirections[column] === 'asc') {
+                    $icon.removeClass('fa-sort fa-sort-down').addClass('fa-sort-up');
+                } else {
+                    $icon.removeClass('fa-sort fa-sort-up').addClass('fa-sort-down');
+                }
+
+                const rowsToSort = $productTbody.find('tr').toArray();
+                rowsToSort.sort((a, b) => {
+                    let valA = $(a).find('td').eq($(this).index()).text().trim();
+                    let valB = $(b).find('td').eq($(this).index()).text().trim();
+
+                    if (!isNaN(valA) && !isNaN(valB)) { // Numeric sort
+                        valA = parseFloat(valA);
+                        valB = parseFloat(valB);
+                    } else { // String sort (LocaleCompare for Gujarati if applicable, though data is English)
+                        valA = valA.toLowerCase();
+                        valB = valB.toLowerCase();
+                    }
+                    
+                    if (valA < valB) return sortDirections[column] === 'asc' ? -1 : 1;
+                    if (valA > valB) return sortDirections[column] === 'asc' ? 1 : -1;
+                    return 0;
+                });
+                $productTbody.empty().append(rowsToSort);
+            });
+
+            // PDF Export
+            $('#exportPdfBtn').on('click', async function() {
+                $(this).prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i> નિકાસ કરી રહ્યું છે...');
+                
+                // Ensure all collapsible sections are open for PDF capture
+                $('.section-content.collapsed').removeClass('collapsed').show();
+                $('.collapsible .fas.fa-chevron-down.rotate').removeClass('rotate');
+
+                // Add a class to body for PDF-specific styling
+                $('body').addClass('pdf-export-prepare');
+                
+                const content = document.getElementById('contentToExport');
+                
+                try {
+                    const canvas = await html2canvas(content, {
+                        scale: 2, // Increase scale for better quality
+                        useCORS: true,
+                        logging: false,
+                        onclone: (clonedDoc) => {
+                            // You can further manipulate the cloned document here if needed
+                            // For example, explicitly set font styles if they don't render correctly
+                            $(clonedDoc).find('*').css({
+                                'font-family': "'Noto Sans Gujarati', sans-serif",
+                                '-webkit-font-smoothing': 'antialiased',
+                                '-moz-osx-font-smoothing': 'grayscale'
+                            });
+                        }
+                    });
+                    
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF({
+                        orientation: 'p',
+                        unit: 'mm',
+                        format: 'a4'
+                    });
+
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = pdf.internal.pageSize.getHeight();
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const imgWidth = pdfWidth - 20; // With margin
+                    const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+                    let heightLeft = imgHeight;
+                    let position = 10; // Top margin
+
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= (pdfHeight - 20); // Subtract page height with margins
+
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight + 10; // Adjust position for next page
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                        heightLeft -= (pdfHeight - 20);
+                    }
+
+                    // Add footer to each page
+                    const pageCount = pdf.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                        pdf.setPage(i);
+                        pdf.setFontSize(8);
+                        pdf.setTextColor(100);
+                        const footerText = `Page ${i} of ${pageCount} | ${createdByPDFText}`;
+                        pdf.text(footerText, pdfWidth / 2, pdfHeight - 10, { align: 'center' });
+                    }
+                    
+                    // Generate a filename (e.g., "एल_રેકના_નિયમો_YYYY-MM-DD.pdf")
+                    const today = new Date();
+                    const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                    const filename = `एल_રેકના_નિયમો_${dateStr}.pdf`;
+
+                    pdf.save(filename);
+
+                } catch (error) {
+                    console.error("PDF નિકાસમાં ભૂલ:", error);
+                    alert("PDF બનાવવામાં ભૂલ આવી. કૃપા કરીને ફરી પ્રયાસ કરો.");
+                } finally {
+                     // Restore button
+                    $(this).prop('disabled', false).html('<i class="fas fa-file-pdf"></i> PDF માં નિકાસ કરો');
+                    // Remove PDF-specific styling class
+                    $('body').removeClass('pdf-export-prepare');
+                    // Optionally, re-collapse sections if needed, or leave them open
+                }
+            });
+             // Initialize item counts
+            $('#searchMrpParty').trigger('keyup');
+            $('#searchBatchParty').trigger('keyup');
+            $('#searchCompany').trigger('keyup');
+            $('#searchProduct').trigger('keyup');
+        });
+    </script>
+</body>
+</html>
+
